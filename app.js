@@ -43,15 +43,17 @@ MongoClient.connect(url, function(err, client) {
 	})
 
 
-	// handle all product post
-	app.post('/addProducts', (req, res) => {
-		productCollection.insertMany(req.body)
-		.then(res=> console.log(res));
-
-		console.log(req.body)
-
-		res.send('your data sent to database');
-	})
+	/*
+	*
+	* handle all product post
+	*
+	*************************/
+	// app.post('/addProducts', (req, res) => {
+	// 	productCollection.insertMany(req.body)
+	// 	.then(res=> console.log(res));
+	// 	console.log(req.body)
+	// 	res.send('your data sent to database');
+	// })
 }) 
 
 
