@@ -36,10 +36,25 @@ MongoClient.connect(url, function(err, client) {
 	// handle events data request
 	app.get('/allProducts', (req, res) => {
 		productCollection.find({})
-		.toArray((err, documents) => {
-			res.send(documents);
-			console.log('product list sent to client')
+			.toArray((err, documents) => {
+				res.send(documents);
+				console.log('product list sent to client')
+			})
+	})
+
+
+	// find many with the Array of ID
+	app.post('/findProducts', (req, res) => {
+		let objectIdList = [];
+		req.body.cartData.map(productId => {
+			const singleObjectId = ObjectId(productId);
+			objectIdList.push(singleObjectId);
 		})
+
+		productCollection.find({ "_id": { "$in": objectIdList } })
+			.toArray((err, documents) => {
+				res.send(documents);
+			})
 	})
 
 
@@ -54,7 +69,7 @@ MongoClient.connect(url, function(err, client) {
 	// 	console.log(req.body)
 	// 	res.send('your data sent to database');
 	// })
-}) 
+})
 
 
 /*
