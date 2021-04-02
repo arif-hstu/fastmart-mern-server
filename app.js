@@ -101,35 +101,21 @@ MongoClient.connect(url, function(err, client) {
 
 	// handle product deletion
 	app.post('/deleteProduct', (req, res) => {
-		console.log(req.body.deletedId)
 		productCollection.deleteOne({ "_id": ObjectId(req.body.deletedId) })
 			.then(res => console.log(res))
 			.catch(error => {
 				console.log(error)
 			})
 		res.send(JSON.stringify({
-			response: 'Your product added successfully!'
+			response: 'deleted'
 		}));
 	})
-
-	/************
-	* handle bulk products add
-	*************/
-	// app.post('/addProducts', (req, res) => {
-	// 	productCollection.insertMany(req.body)
-	// 	.then(res=> console.log(res));
-	// 	console.log(req.body)
-	// 	res.send('your data sent to database');
-	// })
-
-
 })
 
 
-/*
+/************
 *	handle general requests
-*
-*****************************************/
+*************/
 app.get('/', (req, res) => {
 	res.send('Hello World!');
 });
